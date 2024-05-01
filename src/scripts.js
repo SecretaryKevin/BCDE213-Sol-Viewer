@@ -6,13 +6,14 @@ import {OrbitControls} from "three/examples/jsm/controls/OrbitControls.js"
 
 
 const renderer = new THREE.WebGLRenderer();
+const headerHeight = document.querySelector('header').offsetHeight;
 
-renderer.setSize( window.innerWidth, window.innerHeight );
+renderer.setSize( window.innerWidth, window.innerHeight - headerHeight);
 
 document.body.appendChild( renderer.domElement );
 
 const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / (window.innerHeight - headerHeight), 0.1, 1000 );
 const orbit = new OrbitControls( camera, renderer.domElement );
 const axesHelper = new THREE.AxesHelper( 5 );
 
@@ -68,6 +69,12 @@ function onDocumentMouseClick(event) {
         }
     }
 }
+
+window.addEventListener('resize', function() {
+    // Refresh the page when the window size changes
+    location.reload();
+});
+
 function animate() {
     //TODO: find a way to rotate all planets in a loop
     sun.rotateY(0.004)
