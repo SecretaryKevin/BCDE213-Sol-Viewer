@@ -1,0 +1,83 @@
+{
+  "sol": {
+    "radius": 1,
+    "width": 32,
+    "height": 32,
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "texturePath": "../static/textures/sunTexture.jpg"
+  },
+  "mercury": {
+    "radius": 0.5,
+    "width": 32,
+    "height": 32,
+    "x": 4,
+    "y": 0,
+    "z": 0,
+    "texturePath": "../static/textures/mercuryTexture.webp"
+  },
+  "venus": {
+    "radius": 0.5,
+    "width": 32,
+    "height": 32,
+    "x": 6,
+    "y": 0,
+    "z": 0,
+    "texturePath": "../static/textures/venusTexture.jpg"
+  },
+  "earth": {
+    "radius": 0.5,
+    "width": 32,
+    "height": 32,
+    "x": 8,
+    "y": 0,
+    "z": 0,
+    "texturePath": "../static/textures/earthTexture.jpg"
+  },
+  "mars": {
+    "radius": 0.5,
+    "width": 32,
+    "height": 32,
+    "x": 10,
+    "y": 0,
+    "z": 0,
+    "texturePath": "../static/textures/marsTexture.jpg"
+  },
+  "jupiter": {
+    "radius": 0.5,
+    "width": 32,
+    "height": 32,
+    "x": 12,
+    "y": 0,
+    "z": 0,
+    "texturePath": "../static/textures/jupiterTexture.jpg"
+  },
+  "saturn": {
+    "radius": 0.5,
+    "width": 32,
+    "height": 32,
+    "x": 14,
+    "y": 0,
+    "z": 0,
+    "texturePath": "../static/textures/saturnTexture.jpg"
+  },
+  "uranus": {
+    "radius": 0.5,
+    "width": 32,
+    "height": 32,
+    "x": 16,
+    "y": 0,
+    "z": 0,
+    "texturePath": "../static/textures/uranusTexture.jpg"
+  },
+  "neptune": {
+    "radius": 0.5,
+    "width": 32,
+    "height": 32,
+    "x": 18,
+    "y": 0,
+    "z": 0,
+    "texturePath": "../static/textures/neptuneTexture.jpg"
+  }
+}
