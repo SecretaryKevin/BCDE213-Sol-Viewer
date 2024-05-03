@@ -1,0 +1,34 @@
+{
+  "mercuryAnchor": {
+    "angle": 0.1,
+    "orbitSpeed": 0.008
+  },
+    "venusAnchor": {
+        "angle": 0.2,
+        "orbitSpeed": 0.007
+    },
+    "earthAnchor": {
+        "angle": 0.3,
+        "orbitSpeed": 0.006
+    },
+    "marsAnchor": {
+        "angle": 0.4,
+        "orbitSpeed": 0.005
+    },
+    "jupiterAnchor": {
+        "angle": 0.5,
+        "orbitSpeed": 0.004
+    },
+    "saturnAnchor": {
+        "angle": 0.6,
+        "orbitSpeed": 0.003
+    },
+    "uranusAnchor": {
+        "angle": 0.7,
+        "orbitSpeed": 0.002
+    },
+    "neptuneAnchor": {
+        "angle": 0.8,
+        "orbitSpeed": 0.001
+    }
+}

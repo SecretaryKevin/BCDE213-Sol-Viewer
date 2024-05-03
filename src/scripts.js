@@ -1,8 +1,10 @@
 // run  parcel ./src/index.html to start the server
 import * as THREE from 'three';
-import {createMercury, createSun, createVenus, createEarth, createMars,
-createJupiter, createSaturn, createUranus, createNeptune, createPluto} from "./createPlanets";
+import {createSolarSystem} from './createSolarSystem';
+import {createOrbitalAnchors} from './createOrbitalAnchors';
 import {OrbitControls} from "three/examples/jsm/controls/OrbitControls.js"
+import objectPropertiesJson from '../static/celestialBodiesProperties.json';
+import anchorProperties from '../static/orbitalAnchorsProperties.json';
 
 
 const renderer = new THREE.WebGLRenderer();
@@ -15,36 +17,32 @@ document.body.appendChild( renderer.domElement );
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / (window.innerHeight - headerHeight), 0.1, 1000 );
 const orbit = new OrbitControls( camera, renderer.domElement );
-const axesHelper = new THREE.AxesHelper( 5 );
+const axesHelper = new THREE.AxesHelper( 50 );
 
-camera.position.set( 0, 2, 5 );
+camera.position.set( 0, 10, 0 );
+camera.lookAt(0, 0, 0)
 orbit.update();
 scene.add( axesHelper );
 
 
-//TODO: find a way to load all planets in a loop
-let sun = createSun();
-let mercury = createMercury();
-sun.add( mercury );
-let venus = createVenus();
-sun.add( venus );
-let earth = createEarth();
-sun.add( earth );
-let mars = createMars();
-sun.add( mars );
-let jupiter = createJupiter();
-sun.add( jupiter );
-let saturn = createSaturn();
-sun.add( saturn );
-let uranus = createUranus();
-sun.add( uranus );
-let neptune = createNeptune();
-sun.add( neptune );
-let pluto = createPluto();
-sun.add( pluto );
+let solarSystem = createSolarSystem() // Creates the Celestial Bodies Objects
+let sun = solarSystem[0]
+scene.add(sun)
 
-scene.add( sun );
-window.addEventListener('click', onDocumentMouseClick, false);
+let orbitalAnchors = createOrbitalAnchors() // Creates the Orbital Anchors
+for (const anchor of orbitalAnchors) {
+    scene.add(anchor);
+    for (const planet of solarSystem.slice(1)) {
+        // if planet name in anchor name
+        let planetName = planet.name.toLowerCase()
+        if (anchor.name.includes(planetName)) {
+            anchor.add(planet);
+        }
+    }
+}
+
+
+/*window.addEventListener('click', onDocumentMouseClick, false);
 
 
 function onDocumentMouseClick(event) {
@@ -69,6 +67,7 @@ function onDocumentMouseClick(event) {
         }
     }
 }
+    */
 
 window.addEventListener('resize', function() {
     // Refresh the page when the window size changes
@@ -77,10 +76,13 @@ window.addEventListener('resize', function() {
 
 function animate() {
     //TODO: find a way to rotate all planets in a loop
-    sun.rotateY(0.004)
-    mercury.rotateY(0.01)
-    venus.rotateY(0.05)
-    earth.rotateY(0.01)
+    for (const object of solarSystem) {
+        object.rotation.y += objectPropertiesJson[object.name].yRotation
+    }
+    for (const anchor of orbitalAnchors) {
+        anchor.rotation.y += anchorProperties[anchor.name].orbitSpeed
+    }
+
     renderer.render( scene, camera );
 }
 
