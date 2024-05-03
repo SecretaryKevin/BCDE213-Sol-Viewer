@@ -1,4 +1,14 @@
 {
+  "sharedProperties": {
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "radius": 0.1,
+    "widthSegments": 0.1,
+    "heightSegments": 0.1,
+    "color": 0x0000ff,
+    "isTransparent": false
+  },
   "mercuryAnchor": {
     "angle": 0.1,
     "orbitSpeed": 0.008

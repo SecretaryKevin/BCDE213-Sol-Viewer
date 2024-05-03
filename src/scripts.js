@@ -5,6 +5,7 @@ import {createOrbitalAnchors} from './createOrbitalAnchors';
 import {OrbitControls} from "three/examples/jsm/controls/OrbitControls.js"
 import objectPropertiesJson from '../static/celestialBodiesProperties.json';
 import anchorProperties from '../static/orbitalAnchorsProperties.json';
+import otherProperties from '../static/otherProperties.json';
 
 
 const renderer = new THREE.WebGLRenderer();
@@ -15,24 +16,24 @@ renderer.setSize( window.innerWidth, window.innerHeight - headerHeight);
 document.body.appendChild( renderer.domElement );
 
 const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / (window.innerHeight - headerHeight), 0.1, 1000 );
+const camera = new THREE.PerspectiveCamera(otherProperties.defaultCamera.Perspective.fov, window.innerWidth / (window.innerHeight - headerHeight), otherProperties.defaultCamera.Perspective.near, otherProperties.defaultCamera.Perspective.far)
 const orbit = new OrbitControls( camera, renderer.domElement );
-const axesHelper = new THREE.AxesHelper( 50 );
+const axesHelper = new THREE.AxesHelper( 50 ); //TODO: remove this line when done testing
 
-camera.position.set( 0, 10, 0 );
-camera.lookAt(0, 0, 0)
+camera.position.set( otherProperties.defaultCamera.position.x, otherProperties.defaultCamera.position.y, otherProperties.defaultCamera.position.z);
+camera.lookAt(otherProperties.defaultCamera.target.x, otherProperties.defaultCamera.target.y, otherProperties.defaultCamera.target.z);
 orbit.update();
 scene.add( axesHelper );
 
 
 let solarSystem = createSolarSystem() // Creates the Celestial Bodies Objects
-let sun = solarSystem[0]
+let sun = solarSystem[otherProperties.solIndex]
 scene.add(sun)
 
 let orbitalAnchors = createOrbitalAnchors() // Creates the Orbital Anchors
 for (const anchor of orbitalAnchors) {
     scene.add(anchor);
-    for (const planet of solarSystem.slice(1)) {
+    for (const planet of solarSystem.slice(otherProperties.solIndex)) {
         // if planet name in anchor name
         let planetName = planet.name.toLowerCase()
         if (anchor.name.includes(planetName)) {
