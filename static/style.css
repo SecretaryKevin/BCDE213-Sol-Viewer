@@ -55,3 +55,14 @@ a.active {
     color: #0088a9;
 }
 
+#overlayButton{
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 1;
+    display: none;
+    background-color: white;
+    border-radius: 15px;
+    padding: 10px 20px;
+}
+

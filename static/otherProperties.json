@@ -1,10 +1,11 @@
 {
   "solIndex": 0,
+  "scale": 100000,
   "defaultCamera": {
     "position": {
-      "x": 0,
+      "x": 16,
       "y": 10,
-      "z": 0
+      "z": 16
     },
     "target": {
       "x": 0,

@@ -1,6 +1,7 @@
 import anchorProperties from '../static/orbitalAnchorsProperties.json'
 import * as THREE from 'three';
 
+
 const sharedPropertiesName = "sharedProperties"
 const sharedProperties = anchorProperties[sharedPropertiesName]
 export function createOrbitalAnchors() {
@@ -13,6 +14,7 @@ export function createOrbitalAnchors() {
     }
     return orbitalAnchors;
 }
+
 
 function createAnchor(anchor, anchorName){
     let geometry = new THREE.SphereGeometry(sharedProperties.radius, sharedProperties.widthSegments, sharedProperties.heightSegments);

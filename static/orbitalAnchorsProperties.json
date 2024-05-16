@@ -10,35 +10,35 @@
     "isTransparent": false
   },
   "mercuryAnchor": {
-    "angle": 0.1,
-    "orbitSpeed": 0.008
+    "angle": 0.1223476,
+    "orbitSpeed": 0.001
   },
     "venusAnchor": {
-        "angle": 0.2,
-        "orbitSpeed": 0.007
+        "angle": 0.05916666,
+        "orbitSpeed": 0.001
     },
     "earthAnchor": {
-        "angle": 0.3,
-        "orbitSpeed": 0.006
+        "angle": 0,
+        "orbitSpeed": 0.001
     },
     "marsAnchor": {
-        "angle": 0.4,
-        "orbitSpeed": 0.005
+        "angle": 0.03228859,
+        "orbitSpeed": 0.001
     },
     "jupiterAnchor": {
-        "angle": 0.5,
-        "orbitSpeed": 0.004
+        "angle": 0.02286381,
+        "orbitSpeed": 0.001
     },
     "saturnAnchor": {
-        "angle": 0.6,
-        "orbitSpeed": 0.003
+        "angle": 0.0434587,
+        "orbitSpeed": 0.001
     },
     "uranusAnchor": {
-        "angle": 0.7,
-        "orbitSpeed": 0.002
+        "angle": 0.01343904,
+        "orbitSpeed": 0.001
     },
     "neptuneAnchor": {
-        "angle": 0.8,
+        "angle": 0.03089233,
         "orbitSpeed": 0.001
     }
 }

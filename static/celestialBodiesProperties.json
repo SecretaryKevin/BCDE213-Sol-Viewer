@@ -7,7 +7,7 @@
     "y": 0,
     "z": 0,
     "yRotation": 0.01,
-    "texturePath": "http://localhost:1234/sunTexture.5316fbe4.jpg?1714640425873"
+    "texturePath": "http://localhost:1234/sunTexture.5316fbe4.jpg"
   },
   "mercury": {
     "radius": 0.5,
@@ -17,7 +17,7 @@
     "y": 0,
     "z": 0,
     "yRotation": 0.01,
-    "texturePath": "http://localhost:1234/mercuryTexture.2318fdfb.webp?1714640812758"
+    "texturePath": "http://localhost:1234/mercuryTexture.2318fdfb.webp"
   },
   "venus": {
     "radius": 0.5,
@@ -27,7 +27,7 @@
     "y": 0,
     "z": 0,
     "yRotation": 0.01,
-    "texturePath": "http://localhost:1234/venusTexture.865c47d3.jpg?1714640812758 "
+    "texturePath": "http://localhost:1234/venusTexture.865c47d3.jpg"
   },
   "earth": {
     "radius": 0.5,
@@ -87,6 +87,6 @@
     "y": 0,
     "z": 0,
     "yRotation": 0.01,
-    "texturePath": "http://localhost:1234/neptuneTexture.d243dab6.jpg?1714640812758"
+    "texturePath": "http://localhost:1234/neptuneTexture.d243dab6.jpg"
   }
 }

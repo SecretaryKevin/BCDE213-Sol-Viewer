@@ -1,4 +1,5 @@
 // run  parcel ./src/index.html to start the server
+//TODO: give saturn its rings
 import * as THREE from 'three';
 import {createSolarSystem} from './createSolarSystem';
 import {createOrbitalAnchors} from './createOrbitalAnchors';
@@ -7,23 +8,25 @@ import objectPropertiesJson from '../static/celestialBodiesProperties.json';
 import anchorProperties from '../static/orbitalAnchorsProperties.json';
 import otherProperties from '../static/otherProperties.json';
 
+let resetCameraButton = document.getElementById('overlayButton');
+
 
 const renderer = new THREE.WebGLRenderer();
 const headerHeight = document.querySelector('header').offsetHeight;
 
-renderer.setSize( window.innerWidth, window.innerHeight - headerHeight);
+renderer.setSize(window.innerWidth, window.innerHeight - headerHeight);
 
-document.body.appendChild( renderer.domElement );
+document.body.appendChild(renderer.domElement);
 
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(otherProperties.defaultCamera.Perspective.fov, window.innerWidth / (window.innerHeight - headerHeight), otherProperties.defaultCamera.Perspective.near, otherProperties.defaultCamera.Perspective.far)
-const orbit = new OrbitControls( camera, renderer.domElement );
-const axesHelper = new THREE.AxesHelper( 50 ); //TODO: remove this line when done testing
+const orbit = new OrbitControls(camera, renderer.domElement);
+const axesHelper = new THREE.AxesHelper(50); //TODO: remove this line when done testing
 
-camera.position.set( otherProperties.defaultCamera.position.x, otherProperties.defaultCamera.position.y, otherProperties.defaultCamera.position.z);
+camera.position.set(otherProperties.defaultCamera.position.x, otherProperties.defaultCamera.position.y, otherProperties.defaultCamera.position.z);
 camera.lookAt(otherProperties.defaultCamera.target.x, otherProperties.defaultCamera.target.y, otherProperties.defaultCamera.target.z);
 orbit.update();
-scene.add( axesHelper );
+scene.add(axesHelper);
 
 
 let solarSystem = createSolarSystem() // Creates the Celestial Bodies Objects
@@ -38,53 +41,58 @@ for (const anchor of orbitalAnchors) {
         let planetName = planet.name.toLowerCase()
         if (anchor.name.includes(planetName)) {
             anchor.add(planet);
+            let ring = createOrbitRing(planet.position.distanceTo(sun.position))
+            ring.rotateX(anchorProperties[anchor.name].angle)
+            scene.add(ring)
         }
     }
 }
 
-
-/*window.addEventListener('click', onDocumentMouseClick, false);
-
-
-function onDocumentMouseClick(event) {
-    // Calculate mouse position in normalized device coordinates
-    let mouse = new THREE.Vector2();
-    mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-    mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-
-    // Raycast from camera to mouse position
-    let raycaster = new THREE.Raycaster();
-    raycaster.setFromCamera(mouse, camera);
-
-    // Check for intersections with the "sun" and "mercury" objects
-    let intersects = raycaster.intersectObjects([sun, mercury]);
-    if (intersects.length > 0) {
-        //TODO: move to a separate function in a separate file
-        alert(intersects[0].object.name + ' clicked!');
-        if(intersects[0].object.name === "sun") {
-            // display html content
-            let planetInfo = document.getElementById('test')
-            planetInfo.style.display = "block"
-        }
+orbit.addEventListener('change', function () {
+    // if camera position isn't default then show reset button
+    if (camera.position.x !== otherProperties.defaultCamera.position.x ||
+        camera.position.y !== otherProperties.defaultCamera.position.y ||
+        camera.position.z !== otherProperties.defaultCamera.position.z) {
+        resetCameraButton.style.display = 'block';
     }
-}
-    */
+})
 
-window.addEventListener('resize', function() {
+
+function createOrbitRing(radius) {
+    const path = new THREE.Curve();
+    path.getPoint = function (t) {
+        const a = t * 2 * Math.PI;
+        const x = radius * Math.cos(a);
+        const y = radius * Math.sin(a);
+        return new THREE.Vector3(x, y, 0);
+    };
+    const geometry = new THREE.TubeGeometry(path, 64, 0.02, 32, true);
+    const material = new THREE.MeshBasicMaterial({color: 0xffffff, side: THREE.DoubleSide});
+    const ring = new THREE.Mesh(geometry, material);
+    ring.rotation.x = Math.PI / 2;
+    return ring;
+}
+
+window.addEventListener('resize', function () {
     // Refresh the page when the window size changes
     location.reload();
 });
 
 function animate() {
-    //TODO: find a way to rotate all planets in a loop
     for (const object of solarSystem) {
         object.rotation.y += objectPropertiesJson[object.name].yRotation
     }
     for (const anchor of orbitalAnchors) {
         anchor.rotation.y += anchorProperties[anchor.name].orbitSpeed
     }
-
-    renderer.render( scene, camera );
+    renderer.render(scene, camera);
 }
+
+resetCameraButton.addEventListener('click', function () {
+    camera.position.set(otherProperties.defaultCamera.position.x, otherProperties.defaultCamera.position.y, otherProperties.defaultCamera.position.z);
+    camera.lookAt(otherProperties.defaultCamera.target.x, otherProperties.defaultCamera.target.y, otherProperties.defaultCamera.target.z);
+    orbit.update();
+    resetCameraButton.style.display = 'none';
+})
 
 renderer.setAnimationLoop(animate)
