@@ -11,22 +11,22 @@ body {
 
 header {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
     padding: 30px 10%;
     background-color: #24252a;
 }
 
-.logo {
-    margin-right: auto;
-}
-
-
-
 .nav__links {
     list-style: none;
     display: flex;
 }
+
+header h1 {
+    color: white;
+    text-align: left;
+}
+
 
 .nav__links a,
 .overlay__content a {
@@ -52,7 +52,7 @@ a.active {
     color: #0088a9;
 }
 
-#overlayButton{
+#resetButton{
     position: fixed;
     right: 20px;
     bottom: 20px;
@@ -89,7 +89,7 @@ h2{
 
 #sideBar {
     position: absolute;
-    top: 80px; /* Adjust this value based on the height of your header */
+    top: 100px; /* Adjust this value based on the height of your header */
     left: 50%;
     transform: translateX(-50%);
     z-index: 2;

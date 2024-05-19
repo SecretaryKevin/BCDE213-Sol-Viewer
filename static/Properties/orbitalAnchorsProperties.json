@@ -1,0 +1,44 @@
+{
+  "sharedProperties": {
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "radius": 0.1,
+    "widthSegments": 0.1,
+    "heightSegments": 0.1,
+    "color": 0x0000ff,
+    "isTransparent": false
+  },
+  "mercuryAnchor": {
+    "angle": 0.1223476,
+    "orbitSpeed": -0.0415
+  },
+  "venusAnchor": {
+    "angle": 0.05916666,
+    "orbitSpeed": -0.0162
+  },
+  "earthAnchor": {
+    "angle": 0,
+    "orbitSpeed": -0.01
+  },
+  "marsAnchor": {
+    "angle": 0.03228859,
+    "orbitSpeed": -0.0053
+  },
+  "jupiterAnchor": {
+    "angle": 0.02286381,
+    "orbitSpeed": -0.0008
+  },
+  "saturnAnchor": {
+    "angle": 0.0434587,
+    "orbitSpeed": 0.0003
+  },
+  "uranusAnchor": {
+    "angle": 0.01343904,
+    "orbitSpeed": 0.0001
+  },
+  "neptuneAnchor": {
+    "angle": 0.03089233,
+    "orbitSpeed": 0.00006070446
+  }
+}

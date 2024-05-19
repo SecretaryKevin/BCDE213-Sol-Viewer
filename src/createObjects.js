@@ -1,8 +1,22 @@
 //TODO: find better way to load Textures for planets
 
 import * as THREE from 'three';
-import celestialBodiesProperties from '../static/celestialBodiesProperties.json';
-import anchorProperties from "../static/orbitalAnchorsProperties.json";
+import celestialBodiesProperties from '../static/Properties/celestialBodiesProperties.json';
+import anchorProperties from "../static/Properties/orbitalAnchorsProperties.json";
+
+
+//TODO: Workout better solution
+import sunTexture from '../static/textures/sunTexture.jpg';
+import mercuryTexture from '../static/textures/mercuryTexture.webp';
+import venusTexture from '../static/textures/venusTexture.jpg';
+import earthTexture from '../static/textures/earthTexture.jpg';
+import marsTexture from '../static/textures/marsTexture.jpg';
+import jupiterTexture from '../static/textures/jupiterTexture.jpg';
+import saturnTexture from '../static/textures/saturnTexture.jpg';
+import uranusTexture from '../static/textures/uranusTexture.jpg';
+import neptuneTexture from '../static/textures/neptuneTexture.jpg';
+
+let textures= [sunTexture, mercuryTexture, venusTexture, earthTexture, marsTexture, jupiterTexture, saturnTexture, uranusTexture, neptuneTexture];
 
 const sharedPropertiesName = "sharedProperties"
 const sharedProperties = anchorProperties[sharedPropertiesName]
@@ -31,7 +45,9 @@ function createObject(objectProperties, objectName) {
     let textureLoader = new THREE.TextureLoader(); // Create a texture loader
     let geometry = new THREE.SphereGeometry(objectProperties.radius, objectProperties.width, objectProperties.height);
     //TODO: Fix the texturePath to be more dynamic
-    let material = new THREE.MeshBasicMaterial({ map: textureLoader.load(objectProperties.texturePath)});
+    //get planet index from celestialBodiesProperties
+    let planetIndex = Object.keys(celestialBodiesProperties).indexOf(objectName);
+    let material = new THREE.MeshBasicMaterial({ map: textureLoader.load(textures[planetIndex]), side: THREE.DoubleSide });
     let object = new THREE.Mesh(geometry, material);
     object.position.set(objectProperties.x, objectProperties.y, objectProperties.z);
     object.name = objectName;

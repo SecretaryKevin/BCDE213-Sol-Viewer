@@ -3,16 +3,16 @@
 // TODO: restructure file to have functions for creation and removal of objects
 
 import * as THREE from 'three';
-import { createOrbitalAnchors, createOrbitRing, createSolarSystem } from './createObjects';
-import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
-import objectPropertiesJson from '../static/celestialBodiesProperties.json';
-import anchorProperties from '../static/orbitalAnchorsProperties.json';
-import otherProperties from '../static/otherProperties.json';
-
+import {createOrbitalAnchors, createOrbitRing, createSolarSystem} from './createObjects';
+import {OrbitControls} from "three/examples/jsm/controls/OrbitControls.js";
+import objectPropertiesJson from '../static/Properties/celestialBodiesProperties.json';
+import anchorProperties from '../static/Properties/orbitalAnchorsProperties.json';
+import otherProperties from '../static/Properties/otherProperties.json';
+import background from '../static/background.jpg';
 
 const headerHeight = document.querySelector('header').offsetHeight;
 const renderer = initRenderer();
-
+const resetCameraButton = document.getElementById('resetButton');
 
 const camera = new THREE.PerspectiveCamera(
     otherProperties.defaultCamera.Perspective.fov,
@@ -43,10 +43,10 @@ function initRenderer() {
 
 // Initialize scene
 function initScene() {
-    const scene = new THREE.Scene();
-    const axesHelper = new THREE.AxesHelper(50); // TODO: remove this line when done testing
-    scene.add(axesHelper);
-    return scene;
+    let scene = new THREE.Scene();
+    const loader = new THREE.TextureLoader();
+    scene.background = loader.load(background);
+    return scene
 }
 
 // Add solar system to scene
@@ -68,7 +68,8 @@ function addSolarSystemToScene(scene, solarSystem, orbitalAnchors) {
 }
 
 // Update camera position
-function resetCameraPosition(camera, resetCameraButton=undefined) {
+function resetCameraPosition(camera, resetCameraButton) {
+    console.log('resetting camera')
     camera.position.set(
         otherProperties.defaultCamera.position.x,
         otherProperties.defaultCamera.position.y,
@@ -118,7 +119,7 @@ function mainScene() {
 
     addSolarSystemToScene(scene, solarSystem, orbitalAnchors);
 
-    const resetCameraButton = document.getElementById('overlayButton');
+
     resetCameraButton.addEventListener('click', () => resetCameraPosition(camera, resetCameraButton));
 
     orbit.addEventListener('change', () => handleOrbitChange(camera, resetCameraButton));
@@ -140,6 +141,7 @@ function mainScene() {
 
 function planetInfoScene(scene, camera, solarSystem, orbitalAnchors, planet) {
     //TODO: set the camera back to the default position
+    resetCameraPosition(camera, resetCameraButton);
     scene.clear();
     planet.position.set(16, 9.5, 14);
     const newGeometry = new THREE.SphereGeometry(1, 32, 32);
@@ -153,7 +155,7 @@ function planetInfoScene(scene, camera, solarSystem, orbitalAnchors, planet) {
     }
     //TODO: Add each planet's info to the json file here
     infoDiv.innerHTML = `
-        <h2>${planet.name}</h2>
+        <h2>${ planet.name.charAt(0).toUpperCase() + planet.name.slice(1)}</h2>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam varius est odio, sed pharetra ex ornare a. Sed erat leo, rutrum sed lacus non, vulputate placerat nunc. Integer luctus leo ut nibh tristique, in scelerisque tellus tincidunt. Cras justo orci, egestas ut sem sit amet, elementum laoreet velit. Nam venenatis quis neque eu molestie. Vestibulum nec neque lobortis, sagittis nunc id, molestie diam. Nulla tempus eleifend nunc, eu iaculis turpis vulputate eget. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Praesent luctus condimentum vestibulum. Pellentesque in rutrum urna. In sollicitudin, urna id euismod placerat, tellus est fermentum eros, vel cursus enim ante id quam. Aenean interdum, ex rutrum lobortis imperdiet, lacus risus luctus augue, in tincidunt tortor lacus eu sapien. Pellentesque gravida nisl id ante porta, eget efficitur lorem placerat. Fusce placerat vitae magna nec lobortis. Suspendisse vehicula sem mattis mauris congue, ac ultrices lacus consequat. </p>
         <button id="back-button">Back to Solar System</button>
     `;
