@@ -7,7 +7,7 @@ import anchorProperties from "../static/Properties/orbitalAnchorsProperties.json
 
 //TODO: Workout better solution
 import sunTexture from '../static/textures/sunTexture.jpg';
-import mercuryTexture from '../static/textures/mercuryTexture.webp';
+import mercuryTexture from '../static/textures/mercuryTexture.jpg';
 import venusTexture from '../static/textures/venusTexture.jpg';
 import earthTexture from '../static/textures/earthTexture.jpg';
 import marsTexture from '../static/textures/marsTexture.jpg';

@@ -1,4 +1,4 @@
-// Run 'parcel ./src/index.html' to start the server
+// Run 'parcel index.html' to start the server
 // TODO: give Saturn its rings
 // TODO: restructure file to have functions for creation and removal of objects
 
