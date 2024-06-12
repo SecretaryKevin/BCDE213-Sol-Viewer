@@ -14,3 +14,5 @@ Target Audience People wanting to learn more about the solar system with a focus
 Explain what development environment you used and any constraints.
 Development Environment: Webstorm IDE, html, css, javascript using parcel as a bundler.
 Constraints: only doing planets, not including dwarf planets or moons due to time constraints.
+
+Live demo of website: https://bcde213.fly.dev/
