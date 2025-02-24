@@ -15,6 +15,7 @@ import jupiterTexture from '../static/textures/jupiterTexture.jpg';
 import saturnTexture from '../static/textures/saturnTexture.jpg';
 import uranusTexture from '../static/textures/uranusTexture.jpg';
 import neptuneTexture from '../static/textures/neptuneTexture.jpg';
+import saturnRingTexture from '../static/textures/saturnRingTexture.png';
 
 let textures= [sunTexture, mercuryTexture, venusTexture, earthTexture, marsTexture, jupiterTexture, saturnTexture, uranusTexture, neptuneTexture];
 
@@ -29,11 +30,21 @@ export function createSolarSystem() {
         // if planet has ring texture, create ring
         if (celestialBodiesProperties[key].hasOwnProperty("ringTexturePath")) {
             let ringTextureLoader = new THREE.TextureLoader();
-            let ringGeometry = new THREE.RingGeometry(celestialBodiesProperties[key].ringInnerRadius, celestialBodiesProperties[key].ringOuterRadius, 64);
-            let ringMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff, side: THREE.DoubleSide, transparent: true });
-            /*let ringMaterial = new THREE.MeshBasicMaterial({ map: ringTextureLoader.load(celestialBodiesProperties[key].ringTexturePath), side: THREE.DoubleSide, transparent: true }); */
+            let ringGeometry = new THREE.PlaneGeometry(
+                celestialBodiesProperties[key].ringOuterRadius * 3, 
+                celestialBodiesProperties[key].ringOuterRadius * 3
+            );
+            let ringMaterial = new THREE.MeshBasicMaterial({ 
+                map: ringTextureLoader.load(saturnRingTexture),
+                side: THREE.DoubleSide,
+                transparent: true,
+                opacity: 0.9
+            });
             let ring = new THREE.Mesh(ringGeometry, ringMaterial);
-            ring.rotation.x = Math.PI / 2;
+            
+          // make the ring flat
+          ring.rotation.x = Math.PI / 2;
+            
             object.add(ring);
         }
         solarSystem.push(object);
