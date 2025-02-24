@@ -31,10 +31,6 @@ header h1 {
     margin-right: auto;
 }
 
-
-
-
-
 .nav__links a,
 .overlay__content a {
     font-family: "Montserrat", sans-serif;
@@ -93,4 +89,44 @@ ul {
     align-items: center;
     padding: 20px;
     box-sizing: border-box;
+}
+
+/* Add responsive text sizing */
+@media screen and (max-width: 768px) {
+    #aboutContainer {
+        padding: 15px;
+        font-size: 14px;
+    }
+
+    #aboutContainer h2 {
+        font-size: 24px;
+    }
+
+    #aboutContainer h3 {
+        font-size: 20px;
+    }
+
+    .nav__links {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .nav__links li {
+        padding: 5px 10px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    #aboutContainer {
+        padding: 10px;
+        font-size: 12px;
+    }
+
+    #aboutContainer h2 {
+        font-size: 20px;
+    }
+
+    #aboutContainer h3 {
+        font-size: 16px;
+    }
 }

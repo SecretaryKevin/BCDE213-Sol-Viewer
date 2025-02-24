@@ -9,6 +9,7 @@ import objectPropertiesJson from '../static/Properties/celestialBodiesProperties
 import anchorProperties from '../static/Properties/orbitalAnchorsProperties.json';
 import otherProperties from '../static/Properties/otherProperties.json';
 import background from '../static/background.jpg';
+import planetFacts from '../static/Properties/planetFacts.json';
 
 const headerHeight = document.querySelector('header').offsetHeight;
 const renderer = initRenderer();
@@ -90,15 +91,21 @@ function mainScene() {
     const orbit = new OrbitControls(camera, renderer.domElement);
     const solarSystem = createSolarSystem();
     const orbitalAnchors = createOrbitalAnchors();
+    
+    // Safely remove planet info if it exists
+    const existingInfo = document.getElementById('planet-info');
+    if (existingInfo && existingInfo.parentNode) {
+        existingInfo.parentNode.removeChild(existingInfo);
+    }
 
     addSolarSystemToScene(scene, solarSystem, orbitalAnchors);
-
+    
     resetCameraButton.addEventListener('click', resetCameraPosition);
     orbit.addEventListener('change', handleOrbitChange);
     window.addEventListener('resize', handleWindowResize);
-
+    
     animate(renderer, scene, camera, solarSystem, orbitalAnchors);
-
+    
     document.querySelectorAll('.planet-button').forEach(button => {
         button.addEventListener('click', () => {
             const planet = solarSystem.find(p => p.name.toLowerCase() === button.id.toLowerCase());
@@ -113,24 +120,44 @@ function mainScene() {
 function planetInfoScene(scene, solarSystem, orbitalAnchors, planet) {
     resetCameraPosition();
     scene.clear();
-    planet.position.set(16, 9.5, 14);
+    planet.position.set(0, 0, 0);
     planet.geometry.dispose();
     planet.geometry = new THREE.SphereGeometry(1, 32, 32);
     scene.add(planet);
-    let infoDiv = document.getElementById('planet-info');
-    if (!infoDiv) {
-        infoDiv = document.createElement('div');
-        infoDiv.id = 'planet-info';
+    
+    camera.position.set(3, 2, 3);
+    camera.lookAt(0, 0, 0);
+    
+    // Safely remove existing info panel if it exists
+    const existingInfo = document.getElementById('planet-info');
+    if (existingInfo && existingInfo.parentNode) {
+        existingInfo.parentNode.removeChild(existingInfo);
     }
+    
+    const planetName = planet.name.toLowerCase();
+    const facts = planetFacts[planetName]?.facts || ["Facts coming soon..."];
+    
+    // Create new info panel with facts
+    const infoDiv = document.createElement('div');
+    infoDiv.id = 'planet-info';
+    
+    const factsHTML = facts.map(fact => `<p>• ${fact}</p>`).join('');
+    
     infoDiv.innerHTML = `
         <h2>${planet.name.charAt(0).toUpperCase() + planet.name.slice(1)}</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam varius est odio, sed pharetra ex ornare a. Sed erat leo, rutrum sed lacus non, vulputate placerat nunc. Integer luctus leo ut nibh tristique, in scelerisque tellus tincidunt. Cras justo orci, egestas ut sem sit amet, elementum laoreet velit. Nam venenatis quis neque eu molestie. Vestibulum nec neque lobortis, sagittis nunc id, molestie diam. Nulla tempus eleifend nunc, eu iaculis turpis vulputate eget. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Praesent luctus condimentum vestibulum. Pellentesque in rutrum urna. In sollicitudin, urna id euismod placerat, tellus est fermentum eros, vel cursus enim ante id quam. Aenean interdum, ex rutrum lobortis imperdiet, lacus risus luctus augue, in tincidunt tortor lacus eu sapien. Pellentesque gravida nisl id ante porta, eget efficitur lorem placerat. Fusce placerat vitae magna nec lobortis. Suspendisse vehicula sem mattis mauris congue, ac ultrices lacus consequat.</p>
+        <div class="planet-facts">
+            ${factsHTML}
+        </div>
         <button id="back-button">Back to Solar System</button>
     `;
+    
     infoDiv.style.display = 'block';
     document.body.appendChild(infoDiv);
+    
     document.getElementById('back-button').addEventListener('click', () => {
-        document.body.removeChild(infoDiv);
+        if (infoDiv.parentNode) {
+            infoDiv.parentNode.removeChild(infoDiv);
+        }
         mainScene();
     });
 }
