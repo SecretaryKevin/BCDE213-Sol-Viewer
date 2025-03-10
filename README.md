@@ -15,4 +15,4 @@ Explain what development environment you used and any constraints.
 Development Environment: Webstorm IDE, html, css, javascript using parcel as a bundler.
 Constraints: only doing planets, not including dwarf planets or moons due to time constraints.
 
-Live demo of website: https://bcde213.fly.dev/
+[Live demo of website](https://sol-viewer.fly.dev/)
