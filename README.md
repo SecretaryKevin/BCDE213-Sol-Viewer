@@ -1,18 +1,26 @@
-# BCDE213
-Interactive Media Design 
-if using vscode run this command in powershell first: Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Unrestricted
+# Sol Viewer
 
+Explore the solar system with Sol Viewer, a 3D visualization tool for celestial bodies and their orbits.
+
+## Technologies Used
+- HTML
+- CSS
+- JavaScript
+- Three.js
+- Parcel (bundler)
+
+## Get Started
+**Install Dependencies:**
+```bash
 npm install
-
+```
+**Run the Development Server:**
+```bash
 parcel index.html
-
-
-
-Who are the Target Audience?
-Target Audience People wanting to learn more about the solar system with a focus on the planets with little to no prior knowledge.
-
-Explain what development environment you used and any constraints.
-Development Environment: Webstorm IDE, html, css, javascript using parcel as a bundler.
-Constraints: only doing planets, not including dwarf planets or moons due to time constraints.
-
-Live demo of website: https://bcde213.fly.dev/
+```
+**open your browser and navigate to:**
+```
+http://localhost:1234
+```
+## Live Demo
+You can view a live demo of Sol Viewer at [Sol Viewer Demo](https://sol-viewer.fly.dev/).
